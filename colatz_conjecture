@@ -1,0 +1,52 @@
+# Mystery computation in Python
+# Takes input n and computes output named result
+
+import simplegui
+
+# global state
+
+result = 1
+iteration = -1
+n_list = [0, 1]
+
+# helper functions
+
+def init(start):
+    """Initializes n."""
+    global n
+    n = start
+    print "Input is", n
+    
+def get_next(current):
+    """???  Part of mystery computation."""
+    global n, n_list
+    if n%2 == 0:
+        n = n/2
+    else:
+        n = 3*n+1
+    n_list.append(n)
+    return n
+
+# timer callback
+
+def update():
+    """???  Part of mystery computation."""
+    global iteration
+    iteration = iteration + 1
+    print n
+    if n != 1:
+        get_next(n)
+    else:
+        timer.stop()
+        print "\n\n", "Max number reached = ", max(n_list)
+        print "The number of iterations = ", iteration
+    # Stop iterating after max_iterations
+
+# register event handlers
+
+timer = simplegui.create_timer(1, update)
+
+
+# start program
+init(9780657630)
+timer.start()
