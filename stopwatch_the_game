@@ -1,0 +1,121 @@
+# template for "Stopwatch: The Game"
+
+# importing modules
+
+import simplegui
+
+# define global variables
+
+t = 0
+trial_count = 0
+success_count = 0
+
+# define helper function format that converts time
+# in tenths of seconds into formatted string A:BC.D
+
+# t -> an integer representing time in tenth of a second
+# a -> minutes counter
+# c -> seconds counter
+# d -> tenth of a second counter
+def format(t):
+    global a, c, d
+    
+    # calculating tenth of a second(d) and seconds(c)
+    d = int(round(t % 10))
+    c = int(round((t - d) / 10))
+    
+    # converting seconds to minutes(a) and seconds(c)
+    if c >= 60:
+        a = int(round((t - d) / (60*10)))
+        c = c - a*60
+    else:
+        a = 0
+    
+    # formatting two digit output for second
+    if c < 10:
+        return str(a) + ":" + str(0) + str(c) + "." + str(d)
+    else:
+        return str(a) + ":" + str(c) + "." + str(d)
+    
+# define event handlers for buttons; "Start", "Stop", "Reset"
+
+# start button handler
+def start_handler():
+    # start timer
+    timer.start()
+
+# stop button handler
+def stop_handler():
+    global trial_count, success_count
+    
+    # checking timer condition for updating trial_count
+    if timer.is_running():
+        trial_count = trial_count + 1
+        # checking reflex condition for updating success_count
+        if d==0:
+            success_count = success_count + 1
+    
+    
+    # stop timer
+    timer.stop()
+    
+# reset button handler
+def reset_handler():
+    global t, a, c, d, trial_count, success_count
+    
+    #stop timer
+    timer.stop()
+    
+    # resetting values
+    t = 0
+    a = 0
+    c = 0
+    d = 0
+    trial_count = 0
+    success_count = 0
+    
+
+
+# define event handler for timer with 0.1 sec interval
+
+def timer_handler():
+    # updating value of t
+    global t
+    t = t + 1
+
+
+# define draw handler
+
+def draw_handler(canvas):
+    # draw stopwatch
+    canvas.draw_text(format(t), [120,115], 70, "White")
+    # format reflex counter
+    score = str(success_count)+"/"+str(trial_count)
+    # draw reflex counter
+    canvas.draw_text(score, [307,30], 40, "Green")
+    
+
+# create frame
+
+frame = simplegui.create_frame("STOPWATCH", 400, 200)
+
+
+# register event handlers
+
+# register button handlers
+start_button = frame.add_button("START", start_handler, 100)
+stop_button = frame.add_button("STOP", stop_handler, 100)
+reset_button = frame.add_button("RESET", reset_handler, 100)
+
+#register draw handler
+frame.set_draw_handler(draw_handler)
+
+# register timer handler
+timer = simplegui.create_timer(100, timer_handler)
+
+
+# start frame
+
+frame.start()
+
+# Please remember to review the grading rubric
