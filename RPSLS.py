@@ -19,19 +19,18 @@ def name_to_number(name):
     # converts the name input into a number
     
     if name == "rock":
-        number = 0
+        return 0
     elif name == "Spock":
-        number = 1
+        return 1
     elif name == "paper":
-        number = 2
+        return 2
     elif name == "lizard":
-        number = 3
+        return 3
     elif name == "scissors":
-        number = 4
+        return 4
     else:
         print 'Please Input a valid Name ("Rock", "Paper", "Scissors", "Lizard", "Spock")'
         print " R E I N P U T   Y O U R   G U E S S "
-    return number
 
     # convert name to number using if/elif/else
     # don't forget to return the result!
@@ -42,19 +41,18 @@ def number_to_name(number):
     # converts the input number into the corresponding name
     
     if number == 0:
-        name = "rock"
+        return "rock"
     elif number == 1:
-        name = "Spock"
+        return "Spock"
     elif number == 2:
-        name = "paper"
+        return "paper"
     elif number == 3:
-        name = "lizard"
+        return "lizard"
     elif number == 4:
-        name = "scissors"
+        return "scissors"
     else:
         print 'Number out of Range ( An integer from 0 to 4 )'
         print " R E I N P U T   Y O U R   G U E S S "
-    return name
     
     # convert number to a name using if/elif/else
     # don't forget to return the result!
@@ -63,8 +61,9 @@ def number_to_name(number):
 def rpsls(player_choice): 
     # delete the follwing pass statement and fill in your code below
     
+    print " "
+    
     # printing player choice
-    print "---------------------------------------------------------------------------------"
     print "Player chooses", player_choice
     player_number = name_to_number(player_choice)
     
@@ -81,7 +80,6 @@ def rpsls(player_choice):
         print "Computer wins!"
     else:
         print "Player and computer tie!"
-    print " "
     
     # print a blank line to separate consecutive games
 
@@ -106,3 +104,6 @@ rpsls("Spock")
 rpsls("paper")
 rpsls("lizard")
 rpsls("scissors")
+
+# always remember to check your completed program against the grading rubric
+
